@@ -18,9 +18,9 @@ function bindTab(tab, journal){
 	$('#tab-'+tab).click(function(){
 		$('.tab-history').removeClass('selected');
 		$('#tab-'+tab).addClass('selected');
-		if("replaceState" in window.history){
-			window.history.replaceState(null,document.title,'?tab='+tab);
-		}
+//		if("replaceState" in window.history){
+//			window.history.replaceState(null,document.title,'?tab='+tab);
+//		}
 		$('.journal').hide();
 		$(journal).show();
 	});
