@@ -17,8 +17,9 @@ module RedmineIssueDetailedTabsTimeIssuesHelperPatch
         authorize_for('issues', 'edit')
       end
       
-      def validTabs 
-        ['history_comments','history_all','history_activity','history_private','tabtime_time']
+      def validTabs
+        # this will also set the order in which tabs will be displayed
+        ['history_all', 'history_comments','history_activity','history_private','tabtime_time']
       end
       
       def get_issue_history_index(index, count)
@@ -53,7 +54,8 @@ module RedmineIssueDetailedTabsTimeIssuesHelperPatch
           elsif entry.is_a?(TimeEntry) && User.current.allowed_to?(:view_time_entries, @project) 
             tabs.push( {:label => :label_history_tab_time, :name => 'tabtime_time'})    
           end
-        end 
+        end
+        tabs.sort_by! { |t| validTabs.find_index(t[:name]) } unless tabs.empty?
         tabs
       end
       

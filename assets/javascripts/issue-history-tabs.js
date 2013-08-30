@@ -11,16 +11,12 @@ function init_tabs() {
 	bindTab('history_comments', '.journal.has-notes');
 	bindTab('history_activity', '.journal.has-details');
 	bindTab('history_all', '.journal');
-	$('.tab-history.selected').not('#tab-history_all')[0] && $('.tab-history.selected').not('#tab-history_all')[0].click();
 }
 
 function bindTab(tab, journal){
 	$('#tab-'+tab).click(function(){
 		$('.tab-history').removeClass('selected');
 		$('#tab-'+tab).addClass('selected');
-//		if("replaceState" in window.history){
-//			window.history.replaceState(null,document.title,'?tab='+tab);
-//		}
 		$('.journal').hide();
 		$(journal).show();
 	});
