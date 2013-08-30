@@ -120,18 +120,18 @@ module RedmineIssueDetailedTabsTimeIssuesHelperPatch
         c = ""
         if User.current.allowed_to?(:view_time_entries, @project) 
           c << "<div id='time-#{timelog.id}' class='journal has-time'>"
-            c << "<h4>"
-              c << link_to("##{index}", {:anchor => "note-#{index}"}, :class => "journal-link")
-              c << avatar(timelog.user, :size => "24")
-              c << content_tag('a', '', :name => "note-#{index}")
-              c << authoring(timelog.created_on, timelog.user, :label => :label_history_time_logged_by) 
-            c << '</h4>'
-            c << '<ul class="details">'
-              c << '<li><strong>'+ l(:label_history_time_spent) + ":</strong> " + html_hours("%.2f" % timelog.hours) + " " + l(:label_history_time_hours_on) + " " + h(timelog.activity) + '</li>'
-              unless timelog.comments.nil? || timelog.comments.empty?     
-                c << '<li><blockquote><p>' + timelog.comments + '</p></blockquote></li>'
-              end
-            c << '</ul>'
+          c << "<h4>"
+          c << link_to("##{index}", {:anchor => "note-#{index}"}, :class => "journal-link")
+          c << avatar(timelog.user, :size => "24")
+          c << content_tag('a', '', :name => "note-#{index}")
+          c << authoring(timelog.created_on, timelog.user, :label => :label_history_time_logged_by) 
+          c << '</h4>'
+          c << '<ul class="details">'
+          c << '<li><strong>'+ l(:label_history_time_spent) + ":</strong> " + html_hours("%.2f" % timelog.hours) + " " + l(:label_history_time_hours_on) + " " + h(timelog.activity) + '</li>'
+          c << '</ul>'
+          unless timelog.comments.nil? || timelog.comments.empty?     
+            c << '<p>' + timelog.comments + '</p>'
+          end
           c << '</div>'
         end
         c
